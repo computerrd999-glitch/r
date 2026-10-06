@@ -1,0 +1,481 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+  <title>RUDRA GYM TRACKER</title>
+  <link rel="stylesheet" href="style.css">
+  <!-- Google Fonts for premium typography -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Oswald:wght@300;400;500;600;700&family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+</head>
+<body>
+
+  <div class="app-container">
+
+    <!-- ===== SIDEBAR NAVIGATION (Desktop) ===== -->
+    <aside class="sidebar" id="sidebar">
+      <div class="sidebar-brand">
+        <div class="brand-icon">🏋️</div>
+        <h1 class="brand-title">RUDRA</h1>
+        <p class="brand-subtitle">GYM TRACKER</p>
+        <span class="brand-tagline">My Workout • My Progress • My Discipline</span>
+      </div>
+      <nav class="sidebar-nav">
+        <a href="#" class="nav-link active" data-page="home">
+          <span class="nav-icon">🏠</span>
+          <span class="nav-label">Home</span>
+        </a>
+        <a href="#" class="nav-link" data-page="calendar">
+          <span class="nav-icon">📅</span>
+          <span class="nav-label">Calendar</span>
+        </a>
+        <a href="#" class="nav-link" data-page="workout">
+          <span class="nav-icon">💪</span>
+          <span class="nav-label">Workout</span>
+        </a>
+        <a href="#" class="nav-link" data-page="progress">
+          <span class="nav-icon">📊</span>
+          <span class="nav-label">Progress</span>
+        </a>
+        <a href="#" class="nav-link" data-page="settings">
+          <span class="nav-icon">⚙️</span>
+          <span class="nav-label">Settings</span>
+        </a>
+      </nav>
+      <div class="sidebar-footer">
+        <p>v1.0 — Built with 💪</p>
+      </div>
+    </aside>
+
+    <!-- ===== MAIN CONTENT ===== -->
+    <main class="main-content" id="main-content">
+
+      <!-- ======================================== -->
+      <!-- HOME PAGE                                -->
+      <!-- ======================================== -->
+      <section id="page-home" class="page active">
+        <!-- Mobile Header -->
+        <div class="mobile-header">
+          <div class="mobile-brand">
+            <span class="brand-emoji">🏋️</span>
+            <div>
+              <h1>RUDRA GYM TRACKER</h1>
+              <p>My Workout • My Progress • My Discipline</p>
+            </div>
+          </div>
+          <div class="live-clock" id="live-clock">00:00:00</div>
+        </div>
+
+        <!-- Today's Workout Card -->
+        <div class="today-card glass-card animate-in">
+          <div class="today-card-header">
+            <div>
+              <h2 class="section-heading">TODAY'S WORKOUT</h2>
+              <p class="today-date" id="today-date"></p>
+            </div>
+            <div class="today-status" id="today-status"></div>
+          </div>
+          <div class="today-day-label" id="today-day-label"></div>
+          <div class="today-exercises" id="today-exercises"></div>
+          <div class="today-action" id="today-action"></div>
+        </div>
+
+        <!-- Quick Stats Row -->
+        <div class="stats-row animate-in">
+          <div class="stat-card glass-card">
+            <div class="stat-icon-wrap fire">🔥</div>
+            <div class="stat-value" id="home-streak">0</div>
+            <div class="stat-label">Day Streak</div>
+          </div>
+          <div class="stat-card glass-card">
+            <div class="stat-icon-wrap check">✅</div>
+            <div class="stat-value" id="home-completed">0</div>
+            <div class="stat-label">Completed</div>
+          </div>
+          <div class="stat-card glass-card">
+            <div class="stat-icon-wrap chart">📊</div>
+            <div class="stat-value" id="home-progress">0%</div>
+            <div class="stat-label">This Month</div>
+          </div>
+          <div class="stat-card glass-card">
+            <div class="stat-icon-wrap trophy">🏆</div>
+            <div class="stat-value" id="home-best-streak">0</div>
+            <div class="stat-label">Best Streak</div>
+          </div>
+        </div>
+      </section>
+
+      <!-- ======================================== -->
+      <!-- CALENDAR PAGE                            -->
+      <!-- ======================================== -->
+      <section id="page-calendar" class="page">
+        <div class="page-top">
+          <h2 class="section-heading">MONTHLY CALENDAR</h2>
+        </div>
+
+        <!-- Month/Year Navigation -->
+        <div class="month-nav glass-card">
+          <button class="btn-icon" id="btn-prev-month" title="Previous Month">◀</button>
+          <div class="month-selectors">
+            <select id="month-select" class="select-styled">
+              <option value="0">January</option>
+              <option value="1">February</option>
+              <option value="2">March</option>
+              <option value="3">April</option>
+              <option value="4">May</option>
+              <option value="5">June</option>
+              <option value="6">July</option>
+              <option value="7">August</option>
+              <option value="8">September</option>
+              <option value="9">October</option>
+              <option value="10">November</option>
+              <option value="11">December</option>
+            </select>
+            <select id="year-select" class="select-styled"></select>
+          </div>
+          <button class="btn-icon" id="btn-next-month" title="Next Month">▶</button>
+        </div>
+
+        <!-- Legend -->
+        <div class="calendar-legend">
+          <span class="legend-item"><span class="legend-dot dot-green"></span>Completed</span>
+          <span class="legend-item"><span class="legend-dot dot-white"></span>Planned</span>
+          <span class="legend-item"><span class="legend-dot dot-blue"></span>Rest Day</span>
+          <span class="legend-item"><span class="legend-dot dot-yellow"></span>Today</span>
+        </div>
+
+        <!-- Calendar Grid -->
+        <div class="calendar-container glass-card">
+          <div class="calendar-weekdays">
+            <div>Mon</div><div>Tue</div><div>Wed</div><div>Thu</div><div>Fri</div><div>Sat</div><div>Sun</div>
+          </div>
+          <div class="calendar-days" id="calendar-days"></div>
+        </div>
+
+        <!-- Monthly Summary Under Calendar -->
+        <div class="calendar-month-summary glass-card" id="calendar-month-summary"></div>
+      </section>
+
+      <!-- ======================================== -->
+      <!-- WORKOUT PAGE                             -->
+      <!-- ======================================== -->
+      <section id="page-workout" class="page">
+        <div class="page-top">
+          <h2 class="section-heading">WEEKLY WORKOUT PLAN</h2>
+          <button class="btn-accent" id="btn-open-add-exercise">+ ADD WORKOUT</button>
+        </div>
+
+        <div class="workout-plan" id="workout-plan"></div>
+      </section>
+
+      <!-- ======================================== -->
+      <!-- PROGRESS PAGE                            -->
+      <!-- ======================================== -->
+      <section id="page-progress" class="page">
+        <div class="page-top">
+          <h2 class="section-heading">PROGRESS DASHBOARD</h2>
+        </div>
+
+        <!-- Monthly Overview -->
+        <div class="progress-card glass-card" id="progress-card">
+          <h3 class="progress-month-title" id="progress-month-title"></h3>
+          <div class="progress-main">
+            <!-- Circular Progress -->
+            <div class="circular-progress-wrap">
+              <svg class="circular-progress" viewBox="0 0 120 120">
+                <circle class="progress-bg" cx="60" cy="60" r="52"></circle>
+                <circle class="progress-fill" id="progress-circle" cx="60" cy="60" r="52"></circle>
+              </svg>
+              <div class="progress-center-text">
+                <span class="progress-pct" id="progress-pct">0%</span>
+              </div>
+            </div>
+            <!-- Stats -->
+            <div class="progress-stats">
+              <div class="progress-stat">
+                <span class="ps-label">Workout Days</span>
+                <span class="ps-value" id="ps-total">0</span>
+              </div>
+              <div class="progress-stat">
+                <span class="ps-label">Completed</span>
+                <span class="ps-value completed" id="ps-completed">0</span>
+              </div>
+              <div class="progress-stat">
+                <span class="ps-label">Remaining</span>
+                <span class="ps-value remaining" id="ps-remaining">0</span>
+              </div>
+              <div class="progress-stat">
+                <span class="ps-label">Rest Days</span>
+                <span class="ps-value rest" id="ps-rest">0</span>
+              </div>
+            </div>
+          </div>
+          <!-- Progress Bar -->
+          <div class="progress-bar-wrap">
+            <div class="progress-bar-track">
+              <div class="progress-bar-fill" id="progress-bar-fill"></div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Streak Card -->
+        <div class="streak-display glass-card" id="streak-display">
+          <div class="streak-main">
+            <div class="streak-fire">🔥</div>
+            <div class="streak-info">
+              <span class="streak-count" id="streak-current">0</span>
+              <span class="streak-label">DAY STREAK</span>
+            </div>
+          </div>
+          <div class="streak-best">
+            <span>🏆 Longest Streak: <strong id="streak-best-val">0</strong> Days</span>
+          </div>
+        </div>
+
+        <!-- Workout History -->
+        <div class="history-section">
+          <h3 class="section-heading">WORKOUT HISTORY</h3>
+          <div class="history-list" id="history-list">
+            <p class="empty-state">No completed workouts yet. Start your journey today!</p>
+          </div>
+        </div>
+      </section>
+
+      <!-- ======================================== -->
+      <!-- SETTINGS PAGE                            -->
+      <!-- ======================================== -->
+      <section id="page-settings" class="page">
+        <div class="page-top">
+          <h2 class="section-heading">SETTINGS</h2>
+        </div>
+
+        <div class="settings-list">
+          <button class="settings-item glass-card" id="set-add-workout">
+            <span class="set-icon">➕</span>
+            <span class="set-text">Add Custom Workout</span>
+            <span class="set-arrow">›</span>
+          </button>
+          <button class="settings-item glass-card" id="set-edit-workout">
+            <span class="set-icon">✏️</span>
+            <span class="set-text">Edit Workouts</span>
+            <span class="set-arrow">›</span>
+          </button>
+          <button class="settings-item glass-card" id="set-preferences">
+            <span class="set-icon">🎯</span>
+            <span class="set-text">Workout Preferences</span>
+            <span class="set-arrow">›</span>
+          </button>
+          <button class="settings-item glass-card" id="set-backup">
+            <span class="set-icon">💾</span>
+            <span class="set-text">Backup Data</span>
+            <span class="set-arrow">›</span>
+          </button>
+          <button class="settings-item glass-card" id="set-export">
+            <span class="set-icon">📤</span>
+            <span class="set-text">Export Workout Data</span>
+            <span class="set-arrow">›</span>
+          </button>
+          <button class="settings-item glass-card" id="set-import">
+            <span class="set-icon">📥</span>
+            <span class="set-text">Import Workout Data</span>
+            <span class="set-arrow">›</span>
+          </button>
+          <div class="settings-divider"></div>
+          <button class="settings-item glass-card danger" id="set-reset">
+            <span class="set-icon">⚠️</span>
+            <span class="set-text">Reset All Data</span>
+            <span class="set-arrow">›</span>
+          </button>
+        </div>
+      </section>
+
+    </main>
+
+    <!-- ===== BOTTOM NAVIGATION (Mobile) ===== -->
+    <nav class="bottom-nav" id="bottom-nav">
+      <a href="#" class="btm-nav-item active" data-page="home">
+        <span class="btm-icon">🏠</span>
+        <span class="btm-label">Home</span>
+      </a>
+      <a href="#" class="btm-nav-item" data-page="calendar">
+        <span class="btm-icon">📅</span>
+        <span class="btm-label">Calendar</span>
+      </a>
+      <a href="#" class="btm-nav-item" data-page="workout">
+        <span class="btm-icon">💪</span>
+        <span class="btm-label">Workout</span>
+      </a>
+      <a href="#" class="btm-nav-item" data-page="progress">
+        <span class="btm-icon">📊</span>
+        <span class="btm-label">Progress</span>
+      </a>
+      <a href="#" class="btm-nav-item" data-page="settings">
+        <span class="btm-icon">⚙️</span>
+        <span class="btm-label">Settings</span>
+      </a>
+    </nav>
+
+  </div>
+
+  <!-- ============================================ -->
+  <!-- MODALS                                       -->
+  <!-- ============================================ -->
+
+  <!-- Add / Edit Exercise Modal -->
+  <div class="modal-overlay" id="modal-exercise">
+    <div class="modal glass-card">
+      <div class="modal-header">
+        <h3 id="modal-exercise-title">Add Custom Exercise</h3>
+        <button class="modal-close-btn" data-close="modal-exercise">✕</button>
+      </div>
+      <form id="form-exercise" autocomplete="off">
+        <div class="form-group">
+          <label for="inp-ex-name">Exercise Name</label>
+          <input type="text" id="inp-ex-name" placeholder="e.g. Deadlift" required>
+        </div>
+        <div class="form-group">
+          <label for="inp-ex-day">Workout Day</label>
+          <select id="inp-ex-day" class="select-styled">
+            <option value="1">Day 1 — Chest + Triceps</option>
+            <option value="2">Day 2 — Back + Biceps</option>
+            <option value="3">Day 3 — Legs</option>
+            <option value="4">Day 4 — Shoulders + Arms</option>
+            <option value="5">Day 5 — Core / Abs + Light Cardio</option>
+            <option value="6">Day 6 — Full Body</option>
+          </select>
+        </div>
+        <div class="form-group">
+          <label for="inp-ex-category">Category</label>
+          <select id="inp-ex-category" class="select-styled">
+            <option value="Chest">Chest</option>
+            <option value="Back">Back</option>
+            <option value="Legs">Legs</option>
+            <option value="Shoulders">Shoulders</option>
+            <option value="Arms">Arms</option>
+            <option value="Core">Core</option>
+            <option value="Cardio">Cardio</option>
+            <option value="Full Body">Full Body</option>
+            <option value="Custom">Custom</option>
+          </select>
+        </div>
+        <div class="form-row-3">
+          <div class="form-group">
+            <label for="inp-ex-sets">Sets</label>
+            <input type="number" id="inp-ex-sets" value="3" min="1" max="20">
+          </div>
+          <div class="form-group">
+            <label for="inp-ex-reps">Reps</label>
+            <input type="number" id="inp-ex-reps" value="12" min="1" max="100">
+          </div>
+          <div class="form-group">
+            <label for="inp-ex-rest">Rest (sec)</label>
+            <input type="number" id="inp-ex-rest" value="60" min="0" max="600">
+          </div>
+        </div>
+        <div class="form-group">
+          <label for="inp-ex-notes">Notes (optional)</label>
+          <textarea id="inp-ex-notes" rows="2" placeholder="Any notes..."></textarea>
+        </div>
+        <!-- Hidden field for edit ID -->
+        <input type="hidden" id="inp-ex-edit-id" value="">
+        <button type="submit" class="btn-primary full-width" id="btn-save-exercise">Save Exercise</button>
+      </form>
+    </div>
+  </div>
+
+  <!-- Day Detail Modal -->
+  <div class="modal-overlay" id="modal-day-detail">
+    <div class="modal glass-card">
+      <div class="modal-header">
+        <h3 id="modal-day-title">Workout Details</h3>
+        <button class="modal-close-btn" data-close="modal-day-detail">✕</button>
+      </div>
+      <div id="modal-day-body"></div>
+      <div id="modal-day-action"></div>
+    </div>
+  </div>
+
+  <!-- Edit Custom Exercises Modal -->
+  <div class="modal-overlay" id="modal-edit-exercises">
+    <div class="modal glass-card modal-large">
+      <div class="modal-header">
+        <h3>Edit Custom Exercises</h3>
+        <button class="modal-close-btn" data-close="modal-edit-exercises">✕</button>
+      </div>
+      <div id="edit-exercises-body">
+        <p class="empty-state">No custom exercises added yet.</p>
+      </div>
+    </div>
+  </div>
+
+  <!-- Preferences Modal -->
+  <div class="modal-overlay" id="modal-preferences">
+    <div class="modal glass-card">
+      <div class="modal-header">
+        <h3>Workout Preferences</h3>
+        <button class="modal-close-btn" data-close="modal-preferences">✕</button>
+      </div>
+      <div class="form-group">
+        <label for="pref-sets">Default Sets</label>
+        <input type="number" id="pref-sets" value="3" min="1" max="20">
+      </div>
+      <div class="form-group">
+        <label for="pref-reps">Default Reps</label>
+        <input type="number" id="pref-reps" value="12" min="1" max="100">
+      </div>
+      <div class="form-group">
+        <label for="pref-rest">Default Rest Time (seconds)</label>
+        <input type="number" id="pref-rest" value="60" min="0" max="600">
+      </div>
+      <button class="btn-primary full-width" id="btn-save-prefs">Save Preferences</button>
+    </div>
+  </div>
+
+  <!-- Reset Confirmation Modal -->
+  <div class="modal-overlay" id="modal-reset">
+    <div class="modal glass-card">
+      <div class="modal-header">
+        <h3>⚠️ Reset All Data</h3>
+        <button class="modal-close-btn" data-close="modal-reset">✕</button>
+      </div>
+      <!-- Step 1 -->
+      <div id="reset-step1">
+        <p class="warning-text">This will <strong>permanently delete</strong> ALL your workout data including:</p>
+        <ul class="warning-list">
+          <li>All completed workout records</li>
+          <li>Workout history</li>
+          <li>Custom exercises</li>
+          <li>Streak data</li>
+          <li>All preferences</li>
+        </ul>
+        <div class="form-group">
+          <label for="reset-input">Type <strong>RESET</strong> to confirm:</label>
+          <input type="text" id="reset-input" placeholder="Type RESET here" autocomplete="off">
+        </div>
+        <button class="btn-danger full-width" id="btn-reset-step1" disabled>Confirm Reset</button>
+      </div>
+      <!-- Step 2 (hidden by default) -->
+      <div id="reset-step2" class="hidden">
+        <div class="final-warning">
+          <p class="warning-text">⚠️ FINAL WARNING</p>
+          <p>Are you absolutely sure? This action <strong>CANNOT</strong> be undone. All your completed workouts and progress will be lost forever.</p>
+        </div>
+        <div class="reset-final-btns">
+          <button class="btn-danger" id="btn-reset-final">Yes, Delete Everything</button>
+          <button class="btn-secondary" id="btn-reset-cancel">Cancel</button>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Hidden file input for import -->
+  <input type="file" id="import-file" accept=".json" style="display:none">
+
+  <!-- Toast Notification -->
+  <div class="toast-container" id="toast-container"></div>
+
+  <script src="script.js"></script>
+</body>
+</html>
