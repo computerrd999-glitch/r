@@ -291,13 +291,112 @@ ul { list-style: none; }
   letter-spacing: 0.3px;
 }
 
-.live-clock {
+
+/* ============================
+   HERO CLOCK (Home Page)
+   ============================ */
+.hero-clock {
+  padding: 28px 20px 22px;
+  margin-bottom: 24px;
+  text-align: center;
+  background:
+    linear-gradient(135deg, rgba(255, 107, 53, 0.07) 0%, rgba(68, 138, 255, 0.05) 100%),
+    var(--bg-glass);
+  border: 1px solid rgba(255, 107, 53, 0.12);
+  overflow: hidden;
+  position: relative;
+}
+.hero-clock::before {
+  content: '';
+  position: absolute;
+  top: -40%;
+  left: -20%;
+  width: 140%;
+  height: 100%;
+  background: radial-gradient(ellipse, rgba(255,107,53,0.06) 0%, transparent 70%);
+  pointer-events: none;
+}
+.hero-clock-inner { position: relative; z-index: 1; }
+
+/* Time digits row */
+.clock-time-row {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 4px;
+  margin-bottom: 12px;
+}
+.clock-digit {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 56px;
+  height: 72px;
+  background: rgba(255, 255, 255, 0.04);
+  border: 1px solid rgba(255, 255, 255, 0.08);
+  border-radius: 12px;
   font-family: var(--font-heading);
-  font-size: 1.6rem;
-  font-weight: 300;
+  font-size: 2.8rem;
+  font-weight: 700;
+  letter-spacing: 1px;
+  background-image: linear-gradient(180deg, var(--accent) 0%, #ffa726 100%);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+  transition: transform 0.15s ease;
+}
+.clock-digit.flip {
+  transform: scaleY(0.85);
+}
+.clock-colon {
+  font-family: var(--font-heading);
+  font-size: 2.4rem;
+  font-weight: 700;
   color: var(--accent);
+  padding: 0 2px;
+  animation: colonBlink 1s step-end infinite;
+}
+@keyframes colonBlink {
+  0%, 100% { opacity: 1; }
+  50% { opacity: 0.2; }
+}
+.clock-ampm {
+  font-family: var(--font-heading);
+  font-size: 1rem;
+  font-weight: 600;
+  color: var(--text-secondary);
+  margin-left: 8px;
+  letter-spacing: 1px;
+  align-self: flex-end;
+  padding-bottom: 10px;
+}
+
+/* Date row under the clock */
+.clock-date-row {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 10px;
+  font-size: 0.85rem;
+  color: var(--text-secondary);
+  letter-spacing: 0.5px;
+}
+.clock-day-name {
+  font-weight: 600;
+  text-transform: uppercase;
   letter-spacing: 2px;
-  text-align: right;
+  color: var(--text-primary);
+}
+.clock-separator { color: var(--accent); font-size: 0.6rem; }
+.clock-full-date { font-weight: 400; }
+
+/* Greeting */
+.clock-greeting {
+  margin-top: 8px;
+  font-size: 0.78rem;
+  color: var(--text-muted);
+  letter-spacing: 0.5px;
+  font-style: italic;
 }
 
 /* ============================
@@ -1199,8 +1298,16 @@ ul { list-style: none; }
 
   /* Typography adjustments */
   .section-heading { font-size: 1.15rem; }
-  .live-clock { font-size: 1.2rem; }
   .today-day-label { font-size: 1.1rem; }
+
+  /* Hero Clock mobile */
+  .hero-clock { padding: 20px 12px 16px; }
+  .clock-digit { width: 38px; height: 52px; font-size: 1.9rem; border-radius: 8px; }
+  .clock-colon { font-size: 1.6rem; }
+  .clock-ampm { font-size: 0.75rem; padding-bottom: 6px; margin-left: 4px; }
+  .clock-date-row { font-size: 0.75rem; gap: 6px; }
+  .clock-day-name { letter-spacing: 1px; }
+  .clock-greeting { font-size: 0.7rem; }
 
   /* Stats */
   .stats-row { grid-template-columns: repeat(2, 1fr); gap: 10px; }
@@ -1265,7 +1372,9 @@ ul { list-style: none; }
   .stat-card { padding: 10px 8px; }
   .stat-value { font-size: 1.2rem; }
   .stat-label { font-size: 0.6rem; }
-  .live-clock { font-size: 1rem; }
   .mobile-brand h1 { font-size: 1rem; }
   .form-row-3 { grid-template-columns: 1fr; }
+  .clock-digit { width: 30px; height: 42px; font-size: 1.5rem; border-radius: 6px; }
+  .clock-colon { font-size: 1.3rem; }
+  .clock-time-row { gap: 2px; }
 }

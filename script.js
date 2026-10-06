@@ -292,16 +292,55 @@ function initNavigation() {
 }
 
 // =============================================
-// 6. LIVE CLOCK
+// 6. LIVE CLOCK (Premium Aesthetic)
 // =============================================
+
+/** Previous digit values to detect changes for flip animation */
+let prevDigits = { h1: '', h2: '', m1: '', m2: '', s1: '', s2: '' };
 
 function updateClock() {
   const now = new Date();
   const h = String(now.getHours()).padStart(2, '0');
   const m = String(now.getMinutes()).padStart(2, '0');
   const s = String(now.getSeconds()).padStart(2, '0');
-  const clockEl = document.getElementById('live-clock');
-  if (clockEl) clockEl.textContent = `${h}:${m}:${s}`;
+
+  // Update each digit with flip animation on change
+  const digits = { h1: h[0], h2: h[1], m1: m[0], m2: m[1], s1: s[0], s2: s[1] };
+  Object.keys(digits).forEach(key => {
+    const el = document.getElementById('clock-' + key);
+    if (el && digits[key] !== prevDigits[key]) {
+      el.textContent = digits[key];
+      el.classList.add('flip');
+      setTimeout(() => el.classList.remove('flip'), 150);
+    }
+  });
+  prevDigits = { ...digits };
+
+  // AM/PM indicator (24h format label)
+  const ampmEl = document.getElementById('clock-ampm');
+  if (ampmEl) {
+    ampmEl.textContent = now.getHours() >= 12 ? 'PM' : 'AM';
+  }
+
+  // Day name
+  const dayNameEl = document.getElementById('clock-day-name');
+  if (dayNameEl) dayNameEl.textContent = DAY_NAMES[now.getDay()];
+
+  // Full date
+  const fullDateEl = document.getElementById('clock-full-date');
+  if (fullDateEl) fullDateEl.textContent = formatDateDisplay(now);
+
+  // Greeting based on time of day
+  const greetingEl = document.getElementById('clock-greeting');
+  if (greetingEl) {
+    const hour = now.getHours();
+    let greeting = '';
+    if (hour >= 5 && hour < 12) greeting = '🌅 Good Morning — Rise and grind!';
+    else if (hour >= 12 && hour < 17) greeting = '☀️ Good Afternoon — Stay strong!';
+    else if (hour >= 17 && hour < 21) greeting = '🌇 Good Evening — Finish strong!';
+    else greeting = '🌙 Night Owl — Rest well, recover hard!';
+    greetingEl.textContent = greeting;
+  }
 }
 
 // =============================================
